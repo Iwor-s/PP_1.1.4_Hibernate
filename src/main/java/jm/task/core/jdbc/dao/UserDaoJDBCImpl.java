@@ -1,11 +1,13 @@
 package jm.task.core.jdbc.dao;
 
+
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class UserDaoJDBCImpl implements UserDao {
     
@@ -79,7 +81,7 @@ public class UserDaoJDBCImpl implements UserDao {
     
     private enum SQLUser {
         CREATE_TABLE("CREATE TABLE IF NOT EXISTS `users` (" +
-                "`id` SERIAL, " +
+                "`id` SERIAL PRIMARY KEY, " +
                 "`name` VARCHAR(45) NOT NULL, " +
                 "`lastName` VARCHAR(45) NOT NULL, " +
                 "`age` TINYINT UNSIGNED NOT NULL)"),

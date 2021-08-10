@@ -14,7 +14,6 @@ import java.util.Properties;
 
 
 public class Util {
-    // реаusersлизуйте настройку соеденения с БД
     
     private static final String URL = "jdbc:mysql://localhost:3306/db1";
     private static final String USERNAME = "root";

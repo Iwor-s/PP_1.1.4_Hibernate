@@ -5,29 +5,27 @@ import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
 
 public class UserDaoHibernateImpl implements UserDao {
-    
-    
-    
     public UserDaoHibernateImpl() {
     }
-
-
+    
     @Override
     public void createUsersTable() {
         Session session = Util.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.createSQLQuery("CREATE TABLE IF NOT EXISTS `users` (" +
+        session.createSQLQuery(
+                "CREATE TABLE IF NOT EXISTS `users` (" +
                 "`id` SERIAL PRIMARY KEY, " +
                 "`name` VARCHAR(45) NOT NULL, " +
                 "`lastName` VARCHAR(45) NOT NULL, " +
-                "`age` TINYINT UNSIGNED NOT NULL)").executeUpdate();
+                "`age` TINYINT UNSIGNED NOT NULL)"
+        )
+                .executeUpdate();
         transaction.commit();
         session.close();
     }
@@ -36,7 +34,8 @@ public class UserDaoHibernateImpl implements UserDao {
     public void dropUsersTable() {
         Session session = Util.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.createSQLQuery("DROP TABLE IF EXISTS users").executeUpdate();
+        session.createSQLQuery("DROP TABLE IF EXISTS users")
+                .executeUpdate();
         transaction.commit();
         session.close();
     }
@@ -73,7 +72,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void cleanUsersTable() {
         Session session = Util.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.createQuery("From User").list().forEach(session::delete);
+        ((List<User>) session.createQuery("From User").list()).forEach(session::delete);
         transaction.commit();
         session.close();
     }
